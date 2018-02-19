@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt" data-ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>Dog do Sítio</title>
+
+    <!-- JQuery -->
+    <script src="/js/vendor/jquery-3.2.1.min.js"></script>
+
+    <!-- AngularJs -->
+    <script src="/js/vendor/angular-1.6.7.min.js"></script>
+
+    <!-- Popper -->
+    <script src="/js/vendor/popper-1.12.9.min.js"></script>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="/css/vendor/bootstrap-4.0.0.min.css"/>
+    <script src="/js/vendor/bootstrap-4.0.0.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+
+    <!-- App -->
+    <script src="/js/app.js"></script>
+</head>
+<body>
+
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h1 class="display-4"><img src="img/lettering.png" alt="Dog do Sítio"/></h1>
+            <p class="lead">Futuro front-end do sistema para o Dog do Sítio em <a href="https://getbootstrap.com/docs/4.0/components" target="_blank">Bootstrap</a> e <a href="https://docs.angularjs.org/api" target="_blank">AngularJs</a>...</p>
+        </div>
+    </div>
+
+    <nav aria-label="breadcrumb" data-ng-controller="TestBreadcrumbController">
+        <div class="container">
+            <ol class="breadcrumb">
+                <li  data-ng-repeat="item in items" class="breadcrumb-item {{item.active ? 'active' : ''}}">
+                    <a href="{{item.url}}" data-ng-if="!item.active">{{item.label}}</a>
+                    <span data-ng-if="item.active">{{item.label}}</span>
+                </li>
+            </ol>
+        </div>
+    </nav>
+
+    <div class="container" data-ng-controller="TestOrderController">
+        <ul class="list-group">
+            <li data-ng-repeat="order in orders" class="list-group-item d-flex justify-content-between align-items-center">
+                <div>
+                    <div>
+                        <span>Pedido #{{order.id}}</span>
+                        <span class="badge badge-primary badge-pill">{{countProducts(order)}} itens</span>
+                    </div>
+                    <div><small>de {{order.client.name}}, feito em {{order.date | date:'dd/MM/yyyy HH:mm:ss'}}</small></div>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+</body>
+</html>
