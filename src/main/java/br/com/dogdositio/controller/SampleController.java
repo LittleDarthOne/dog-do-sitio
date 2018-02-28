@@ -1,4 +1,4 @@
-package br.com.dogdositio.rest;
+package br.com.dogdositio.controller;
 
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,14 +10,11 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by jeferson.oliveira on 19/02/2018.
- */
 @RestController
-public class TestController {
+public class SampleController {
 
-    @GetMapping(value = {"/test/{pathParam}", "/hello/{pathParam}"}, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public Map<String, Object> testEndpoint (@PathVariable String pathParam, @RequestParam(required = false) String requestParam) {
+    @GetMapping(value = {"/sample/{pathParam}", "/hello/{pathParam}"}, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public Map<String, Object> sampleEndpoint (@PathVariable String pathParam, @RequestParam(required = false) String requestParam) {
         Map<String, Object> responseBody = new HashMap<>();
         responseBody.put("requestDate", new Date());
         responseBody.put("pathParam", pathParam);

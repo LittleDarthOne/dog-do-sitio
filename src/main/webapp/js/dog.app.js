@@ -1,14 +1,14 @@
-angular.module('app', [])
+var app = angular.module('dog.app', ['dog.service.product']);
 
-.controller('TestBreadcrumbController', function($scope, $locale) {
+app.controller('TestBreadcrumbController', function($scope, $locale) {
     $scope.items=[
         {url: '#', label: 'Área 1'},
         {url: '#', label: 'Área 2'},
         {url: '#', label: 'Área 3', active: true},
     ];
-})
+});
 
-.controller('TestOrderController', function($scope, $locale) {
+app.controller('TestOrderController', function($scope, $locale) {
     $scope.orders=[
         {
             id: '1',
@@ -48,4 +48,22 @@ angular.module('app', [])
         }
         return count;
     };
+});
+
+app.controller('ProductListController', function($scope, $locale, ProductService) {
+
+    $scope.products = [];
+    $scope.newProduct = {name: null, description: null, price: 0.00};
+
+    ProductService.getAll().then(function (response) {
+        $scope.products = response.data;
+    });
+
+    $scope.save = function(product) {
+        ProductService.save(product).then(function (response) {
+            $scope.products.push(response.data);
+            $scope.newProduct = {name: null, description: null, price: 0.00};
+        });
+    };
+
 });
