@@ -8,6 +8,10 @@ angular.module('dog.service.product', [])
         return $http.post(urlBase, product);
     };
 
+    service.delete = function (productId) {
+        return $http.delete(urlBase + '/' + productId);
+    };
+
     service.getAll = function () {
         return $http.get(urlBase);
     };

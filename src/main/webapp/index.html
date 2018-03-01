@@ -37,7 +37,7 @@
     <nav aria-label="breadcrumb" data-ng-controller="TestBreadcrumbController">
         <div class="container">
             <ol class="breadcrumb">
-                <li  data-ng-repeat="item in items" class="breadcrumb-item {{item.active ? 'active' : ''}}">
+                <li data-ng-repeat="item in items" class="breadcrumb-item {{item.active ? 'active' : ''}}">
                     <a href="{{item.url}}" data-ng-if="!item.active">{{item.label}}</a>
                     <span data-ng-if="item.active">{{item.label}}</span>
                 </li>
@@ -61,6 +61,9 @@
                         </div>
                         <div>
                             <span class="badge badge-primary badge-pill">{{product.price | currency}}</span>
+                        </div>
+                        <div>
+                            <button type="button" class="btn btn-primary" data-ng-click="delete(product.id)"><i class="fas fa-trash-alt"></i> Excluir</button>
                         </div>
                     </li>
                 </ul>

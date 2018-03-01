@@ -44,4 +44,15 @@ public class ProductController {
         }
     }
 
+    @DeleteMapping(value = {"/{id}/", "/{id}"}, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public HttpEntity<Product> delete(@PathVariable Long id) {
+        Product product = productDAO.loadById(id);
+        if(product != null) {
+            productDAO.delete(product);
+            return new ResponseEntity(HttpStatus.OK);
+        } else {
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
+        }
+    }
+
 }

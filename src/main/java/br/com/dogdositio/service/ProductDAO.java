@@ -21,6 +21,11 @@ public class ProductDAO implements BaseProductDAO {
     }
 
     @Override
+    public void delete(Product product) {
+        productRepository.delete(product);
+    }
+
+    @Override
     public Product loadById(Long id) {
         return productRepository.findOne(id);
     }
@@ -40,11 +45,11 @@ public class ProductDAO implements BaseProductDAO {
         if(name != null && !name.trim().isEmpty()) {
             if(!name.startsWith("%")) name = "%" + name;
             if(!name.endsWith("%")) name = name + "%";
-        }
 
-        List<Product> products = productRepository.findByName(name);
-        if(products != null) {
-            return products;
+            List<Product> products = productRepository.findByName(name);
+            if(products != null) {
+                return products;
+            }
         }
 
         return new ArrayList<>();
