@@ -53,7 +53,7 @@ app.controller('TestOrderController', function($scope, $locale) {
 app.controller('ProductListController', function($scope, $locale, ProductService) {
 
     $scope.products = [];
-    $scope.newProduct = {name: null, description: null, price: 0.00};
+    $scope.editingProduct = {id: null, name: null, description: null, price: null};
 
     ProductService.getAll().then(function (response) {
         $scope.products = response.data;
@@ -62,7 +62,8 @@ app.controller('ProductListController', function($scope, $locale, ProductService
     $scope.save = function(product) {
         ProductService.save(product).then(function (response) {
             $scope.products.push(response.data);
-            $scope.newProduct = {name: null, description: null, price: 0.00};
+            $scope.editingProduct = {id: null, name: null, description: null, price: null};
+            $('#editingProductModal').modal('hide');
         });
     };
 

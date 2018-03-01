@@ -9,6 +9,7 @@
 
     <!-- AngularJs -->
     <script src="/js/vendor/angular-1.6.7.min.js"></script>
+    <script src="/js/vendor/angular-locale_pt-br.js"></script>
 
     <!-- Popper -->
     <script src="/js/vendor/popper-1.12.9.min.js"></script>
@@ -18,7 +19,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 
     <!-- Font Awesome -->
-    <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+    <script src="js/vendor/fontawesome-all-5.0.7.min.js"></script>
 
     <!-- Angular App -->
     <script src="/js/dog.app.js"></script>
@@ -66,57 +67,30 @@
             </div>
         </div>
 
-
-        <div class="row">
+        <div class="row mt-2">
             <div class="col-sm">
-                <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#newProductModal" data-ng-click="handleNewProduct()"><i class="fas fa-plus-circle"></i> Adicionar produto</button>
+                <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#editingProductModal"><i class="fas fa-plus-circle"></i> Adicionar produto</button>
             </div>
         </div>
 
-
-        <!--
-        <div class="row">
-            <form>
-                <div class="form-group">
-                    <label for="product-name" class="col-form-label">Nome:</label>
-                    <input id="product-name" type="text" class="form-control" dta-ng-model="newProduct.name">
-                </div>
-                <div class="form-group">
-                    <label for="product-description" class="col-form-label">Descrição:</label>
-                    <textarea id="product-description" class="form-control" dta-ng-model="newProduct.description"></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="product-price" class="col-form-label">Preço:</label>
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">R$</span>
-                        </div>
-                        <input id="product-price" type="number" value="1.00" min="0" step="0.10" class="form-control currency" dta-ng-model="newProduct.price"/>
-                    </div>
-                </div>
-                <button type="button" class="btn btn-primary" data-ng-click="save(newProduct)">Adicionar</button>
-            </form>
-        </div>
-        -->
-
-        <div class="modal fade" id="newProductModal" tabindex="-1" role="dialog" aria-labelledby="newProductModalLabel" aria-hidden="true">
+        <div class="modal fade" id="editingProductModal" tabindex="-1" role="dialog" aria-labelledby="editingProductModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="newProductModalLabel">Novo produto</h5>
+                        <h5 class="modal-title" id="editingProductModalLabel">Novo produto</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form>
+                        <form action="#">
                             <div class="form-group">
                                 <label for="product-name" class="col-form-label">Nome:</label>
-                                <input id="product-name" type="text" class="form-control" dta-ng-model="newProduct.name">
+                                <input id="product-name" type="text" class="form-control" data-ng-model="editingProduct.name">
                             </div>
                             <div class="form-group">
                                 <label for="product-description" class="col-form-label">Descrição:</label>
-                                <textarea id="product-description" class="form-control" dta-ng-model="newProduct.description"></textarea>
+                                <textarea id="product-description" class="form-control" data-ng-model="editingProduct.description"></textarea>
                             </div>
                             <div class="form-group">
                                 <label for="product-price" class="col-form-label">Preço:</label>
@@ -124,18 +98,19 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">R$</span>
                                     </div>
-                                    <input id="product-price" type="number" value="1.00" min="0" step="0.10" class="form-control currency" dta-ng-model="newProduct.price"/>
+                                    <input id="product-price" type="number" min="0" step="0.10" placeholder="0,00" class="form-control currency" data-ng-model="editingProduct.price"/>
                                 </div>
                             </div>
                         </form>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-ban"></i> Cancelar</button>
-                        <button type="button" class="btn btn-primary" data-ng-click="save(newProduct)"><i class="fas fa-save"></i> Adicionar</button>
+                        <button type="submit" class="btn btn-primary" data-ng-click="save(editingProduct)"><i class="fas fa-save"></i> Adicionar</button>
                     </div>
                 </div>
             </div>
         </div>
+
     </div>
 
 

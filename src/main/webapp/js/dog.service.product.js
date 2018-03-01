@@ -4,7 +4,11 @@ angular.module('dog.service.product', [])
     var urlBase = '/product';
     var service = {};
 
-    service.getAll = function (success, error) {
+    service.save = function (product) {
+        return $http.post(urlBase, product);
+    };
+
+    service.getAll = function () {
         return $http.get(urlBase);
     };
 
