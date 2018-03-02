@@ -1,0 +1,6 @@
+.dog-bg-header {
+    background: url(/img/bg-header.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
