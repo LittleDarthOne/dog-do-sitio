@@ -1,15 +1,17 @@
-var app = angular.module('dog.app', ['dog.service.product']);
+var app = angular.module('dog.app', ['ngRoute', 'dog.service.product']);
 
-app.controller('HeaderController', function($scope) {
+app.config(function($routeProvider, $locationProvider) {
+	$routeProvider.when('/home', {
+		templateUrl: 'home.html',
+		controller: 'HomeController'
+	});
 
-    $scope.resizeJumbotronBanner = function(){
-        $('#jumbotron-banner').css({
-            'height': $(window).height()
-        });
-    };
-    $scope.resizeJumbotronBanner();
-    $(window).resize($scope.resizeJumbotronBanner);
+	$routeProvider.when('/products', {
+		templateUrl: 'products.html',
+		controller: 'ProductsController'
+	});
 
+	$routeProvider.otherwise({redirectTo: '/home' });
 });
 
 app.controller('TestBreadcrumbController', function($scope, $locale) {
@@ -20,8 +22,46 @@ app.controller('TestBreadcrumbController', function($scope, $locale) {
     ];
 });
 
-app.controller('ProductListController', function($scope, $locale, ProductService) {
+app.controller('NavController', function($scope, $locale) {
+    $scope.elements = [
+        {label: 'Home', target: '#!home', active: true},
+        {label: 'Cardápio', target: '#!products', active: false}
+    ];
 
+    $scope.onClick = function(element){
+        for(var count = 0; count < $scope.elements.length; count ++) {
+            $scope.elements[count].active = false;
+        }
+        element.active = true;
+    };
+});
+
+app.controller('HomeController', function($scope, $locale) {
+    $scope.resizeBanners = function(){
+        $('#banners').css({
+            'height': $(window).height(),
+            'max-height': $(window).height(),
+            'overflow': 'hidden'
+        });
+    };
+    $scope.resizeBanners();
+    $(window).resize($scope.resizeBanners);
+
+    $scope.banners = [
+        {active: true, backgroundImage: '/img/banner/dog.jpg', title: 'Aqui tem hot dog!', description: 'Começou só com cachorro-quente, mas a essa altura, nem sem mais se ainda sai algum...'},
+        {active: false, backgroundImage: '/img/banner/bauru.jpg', title: 'Aqui também xis!', description: 'Acho que agora é o que mais sai...'},
+        {active: false, backgroundImage: '/img/banner/prato.jpg', title: 'Será que vai ter prato?', description: 'Quem sabe, daqui a pouco não passa a oferecer prato também...'}
+    ];
+
+    $scope.onSelectBanner = function(banner){
+        for(var count = 0; count < $scope.elements.length; count ++) {
+            $scope.banners[count].active = false;
+        }
+        banner.active = true;
+    };
+});
+
+app.controller('ProductsController', function($scope, $locale, ProductService) {
     $scope.products = [];
     $scope.editingProduct = {id: null, name: null, description: null, price: null};
 
@@ -53,11 +93,4 @@ app.controller('ProductListController', function($scope, $locale, ProductService
             }
         });
     };
-
-    $scope.bannerHeight = $(window).height();
-    // make sure div stays full width/height on resize
-    $(window).resize(function(){
-        $scope.bannerHeight = $(window).height();
-    });
-
 });

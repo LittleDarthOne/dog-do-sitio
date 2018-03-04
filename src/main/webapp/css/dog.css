@@ -1,6 +1,32 @@
-.dog-bg-header {
+.banner-image {
     background: url(/img/bg-header.jpg);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
+}
+
+.banners-bullet {
+    height: 20px !important;
+    width: 20px !important;
+}
+
+.drop-shadow {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.text-shadow {
+    text-shadow: 1px 1px 8px #000;
+}
+
+.mt-6, my-6 {
+    margin-top: 6rem!important;
+}
+.mb-6, my-6 {
+    margin-bottom: 6rem!important;
+}
+.mt-7, my-7 {
+    margin-top: 9rem!important;
+}
+.mb-7, my-7 {
+    margin-bottom: 9rem!important;
 }

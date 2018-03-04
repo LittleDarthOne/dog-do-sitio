@@ -1,0 +1,67 @@
+<div class="container mt-7 mb-5">
+    <div class="row">
+        <div class="col-sm">
+            <ul class="list-group">
+                <li data-ng-repeat="product in products" class="list-group-item d-flex justify-content-between align-items-center">
+                    <div>
+                        <div>
+                            <span>{{product.id}} - {{product.name}}</span>
+                            <small>(adicionado em {{product.creationDate | date:'dd/MM/yyyy HH:mm:ss'}})</small>
+                        </div>
+                        <div><small>{{product.description}}</small></div>
+                    </div>
+                    <div>
+                        <span class="badge badge-warning badge-pill">{{product.price | currency}}</span>
+                    </div>
+                    <div>
+                        <button type="button" class="btn btn-warning" data-ng-click="delete(product.id)"><i class="fas fa-trash-alt"></i> Excluir</button>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="row mt-2">
+        <div class="col-sm">
+            <button type="button" class="btn btn-warning float-right" data-toggle="modal" data-target="#editingProductModal"><i class="fas fa-plus-circle"></i> Adicionar produto</button>
+        </div>
+    </div>
+
+    <div class="modal fade" id="editingProductModal" tabindex="-1" role="dialog" aria-labelledby="editingProductModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editingProductModalLabel">Novo produto</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="#">
+                        <div class="form-group">
+                            <label for="product-name" class="col-form-label">Nome:</label>
+                            <input id="product-name" type="text" class="form-control" data-ng-model="editingProduct.name">
+                        </div>
+                        <div class="form-group">
+                            <label for="product-description" class="col-form-label">Descrição:</label>
+                            <textarea id="product-description" class="form-control" data-ng-model="editingProduct.description"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="product-price" class="col-form-label">Preço:</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">R$</span>
+                                </div>
+                                <input id="product-price" type="number" min="0" step="0.10" placeholder="0,00" class="form-control currency" data-ng-model="editingProduct.price"/>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-ban"></i> Cancelar</button>
+                    <button type="submit" class="btn btn-warning" data-ng-click="save(editingProduct)"><i class="fas fa-save"></i> Adicionar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,35 @@
+<div id="banners" class="carousel slide" data-ride="carousel" data.ng-if="banners.length">
+    <ol class="carousel-indicators" data.ng-if="banners.length > 1">
+        <li data-target="#banners" data-ng-repeat="banner in banners" data-slide-to="{{$index}}"
+            class="rounded-circle banners-bullet shadow-bottom {{banner.active ? 'active' : ''}}"
+            data-ng-click="onSelectBanner(banner)">{{$index}}</li>
+    </ol>
+    <div class="carousel-inner h-100">
+        <div data-ng-repeat="banner in banners" class="carousel-item h-100 {{banner.active ? 'active' : ''}}">
+            <div class="w-100 h-100 banner-image" style="background-image: url('{{banner.backgroundImage}}')">
+                <div class="carousel-caption d-none d-md-block" data-ng-if="(banner.title && banner.title.length) || (banner.description && banner.description.length)">
+                    <h5 class="text-shadow" data-ng-if="banner.title && banner.title.length">{{banner.title}}</h5>
+                    <p class="text-shadow" data-ng-if="banner.description && banner.description.length">{{banner.description}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container my-5">
+    <div class="row">
+        <div class="col-sm">
+            HOME...
+        </div>
+    </div>
+</div>
+
+<div id="jumbotron-map-home" class="jumbotron jumbotron-fluid m-0 p-0">
+    <iframe
+            width="100%"
+            height="400"
+            frameborder="0"
+            style="border:0"
+            src="https://www.google.com/maps/embed/v1/place?key=AIzaSyByDk-K5wTuoQMTQ_GqiitVQg149ek8UnI&q=Dog+do+Sitio,Rio+Grande+-+RS">
+    </iframe>
+</div>

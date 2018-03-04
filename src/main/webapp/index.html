@@ -9,6 +9,7 @@
 
     <!-- AngularJs -->
     <script src="/js/vendor/angular-1.6.7.min.js"></script>
+    <script src="/js/vendor/angular-route-1.6.7.min.js"></script>
     <script src="/js/vendor/angular-locale_pt-br.js"></script>
 
     <!-- Popper -->
@@ -28,143 +29,32 @@
 </head>
 <body data-ng-cloak>
 
-    <header data-ng-controller="HeaderController">
-        <nav class="navbar navbar-expand-lg fixed-top navbar-light bg-white">
-            <a class="navbar-brand" href="#"><img src="/img/lettering.png" alt="Dog do Sítio"/></a>
+    <header data-ng-controller="NavController">
+        <nav class="navbar navbar-expand-lg fixed-top navbar-light bg-white drop-shadow">
+            <a class="navbar-brand" href="#!home"><img src="/img/lettering.svg" width="170" alt="Dog do Sítio"/></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Dropdown
+                    <li data-ng-repeat="element in elements" class="nav-item {{element.active ? 'active' : ''}}" data-ng-click="onClick(element)">
+                        <a class="nav-link" href="{{element.target}}">
+                            <span class="nav-item {{element.active ? 'border-bottom border-warning' : ''}}">{{element.label}}</span>
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link disabled" href="#">Disabled</a>
                     </li>
                 </ul>
                 <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Search</button>
+                    <!--<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">-->
+                    <button class="btn btn-outline-warning my-2 my-sm-0" type="submit"><i class="fas fa-sign-in-alt"></i> Entrar</button>
                 </form>
             </div>
         </nav>
-
-        <div id="jumbotron-banner" class="jumbotron jumbotron-fluid dog-bg-header">
-            <div class="container text-center">
-                <!--
-                <div class="col-md-5 p-lg-5 mx-auto my-5 text-white">
-                    <h1 class="display-4 font-weight-normal">Um textinho</h1>
-                    <p class="lead font-weight-normal">Um textinho de apresentação e boas vindas. Lero lero lero lero e tal e côsa, bla bla bla e enxeção de linguiça...</p>
-                </div>
-                -->
-                <!--
-                <h1 class="display-4"><img src="img/lettering.png" alt="Dog do Sítio"/></h1>
-                <p class="lead">Altura de <span data-ng-bind="bannerHeight"></span>px</p>
-                -->
-            </div>
-        </div>
     </header>
 
-    <main>
+    <main data-ng-view></main>
 
-        <nav aria-label="breadcrumb" data-ng-controller="TestBreadcrumbController">
-            <div class="container">
-                <ol class="breadcrumb">
-                    <li data-ng-repeat="item in items" class="breadcrumb-item {{item.active ? 'active' : ''}}">
-                        <a href="{{item.url}}" data-ng-if="!item.active">{{item.label}}</a>
-                        <span data-ng-if="item.active">{{item.label}}</span>
-                    </li>
-                </ol>
-            </div>
-        </nav>
-
-
-        <div class="container" data-ng-controller="ProductListController">
-            <div class="row">
-                <div class="col-sm">
-                    <ul class="list-group">
-                        <li data-ng-repeat="product in products" class="list-group-item d-flex justify-content-between align-items-center">
-                            <div>
-                                <div>
-                                    <span>{{product.id}} - {{product.name}}</span>
-                                    <small>(adicionado em {{product.creationDate | date:'dd/MM/yyyy HH:mm:ss'}})</small>
-                                </div>
-                                <div><small>{{product.description}}</small></div>
-                            </div>
-                            <div>
-                                <span class="badge badge-warning badge-pill">{{product.price | currency}}</span>
-                            </div>
-                            <div>
-                                <button type="button" class="btn btn-warning" data-ng-click="delete(product.id)"><i class="fas fa-trash-alt"></i> Excluir</button>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="row mt-2">
-                <div class="col-sm">
-                    <button type="button" class="btn btn-warning float-right" data-toggle="modal" data-target="#editingProductModal"><i class="fas fa-plus-circle"></i> Adicionar produto</button>
-                </div>
-            </div>
-
-            <div class="modal fade" id="editingProductModal" tabindex="-1" role="dialog" aria-labelledby="editingProductModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="editingProductModalLabel">Novo produto</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <form action="#">
-                                <div class="form-group">
-                                    <label for="product-name" class="col-form-label">Nome:</label>
-                                    <input id="product-name" type="text" class="form-control" data-ng-model="editingProduct.name">
-                                </div>
-                                <div class="form-group">
-                                    <label for="product-description" class="col-form-label">Descrição:</label>
-                                    <textarea id="product-description" class="form-control" data-ng-model="editingProduct.description"></textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label for="product-price" class="col-form-label">Preço:</label>
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text">R$</span>
-                                        </div>
-                                        <input id="product-price" type="number" min="0" step="0.10" placeholder="0,00" class="form-control currency" data-ng-model="editingProduct.price"/>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-ban"></i> Cancelar</button>
-                            <button type="submit" class="btn btn-warning" data-ng-click="save(editingProduct)"><i class="fas fa-save"></i> Adicionar</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </main>
-
-    <footer class="bg-warning py-5 mt-5">
+    <footer class="bg-warning py-5">
         <div class="container">
             <p class="float-right warning-link">
                 <a href="#">Back to top</a>
